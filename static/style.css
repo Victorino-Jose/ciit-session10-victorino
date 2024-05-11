@@ -14,16 +14,27 @@ header{
   text-align: center;
 }
 input[type="text"]{
-  padding: 10px;
-  margin-bottom: 20px;
+  color: black;
+  outline: none;
+  padding: 8px;
+  border: 1px solid #323334;
+  border-radius: 3px;
+}
+form{
+  width: 80%;
+}
+form div{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 button{
-  padding: 10px;
+  padding: 10px 20px;
+  color: #e6e6e6;
+  background: #0b49da;
+  border: none;
   cursor: pointer;
-}
-.edit_task{
-  margin-top: 10px;
-  margin-left: 10px;
 }
 .container{
   margin-top: 50px;
@@ -38,31 +49,10 @@ button{
   border-radius: 8px;
   margin: 30px auto 0;
 }
-ul{
-  list-style: none;
-  width: 100%;
-}
-.container ul{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.container li{
-  background: rgb(157, 159, 173);
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  border-radius: 8px;
-}
 
-.container li.completed{
-  opacity: 0.6;
-}
-.container li.completed p{
-  text-decoration: line-through;
-}
+
+
+
 a{
   color: white;
   text-decoration: none;
@@ -74,14 +64,9 @@ a{
   padding: 3px 7px;
 }
 
-a.done{
-  background: rgb(5, 184, 5);
-}
-
 a.edit{
   background: rgb(5, 5, 184);
 }
-
 a.delete{
   background: rgb(198, 0, 0);
 }
@@ -95,7 +80,9 @@ ul.navlist{
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: #747474;
+  width: 100%;
+  box-shadow: 0 0 8px hsl(0, 0%, 53%);
 }
 
 li.navitem{
@@ -104,7 +91,7 @@ li.navitem{
 
 a.navcontent{
   display: block;
-  color: white;
+  color: hsl(0, 0%, 95%);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -112,4 +99,17 @@ a.navcontent{
 
 a.navcontent:hover{
   background-color: #111;
+}
+
+table{
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 30px;
+}
+td, th{
+  padding: 5px;
+  border: 1px solid black;
+}
+td.action{
+  text-align: center;
 }

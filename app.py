@@ -8,74 +8,59 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-class Task(db.Model):
+class Book(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  description = db.Column(db.String(200), nullable=False)
-  completed = db.Column(db.Boolean, default=False)
-    
+  isbn = db.Column(db.Integer, nullable=False)
+  title = db.Column(db.String(200), nullable=False)
+  author = db.Column(db.String(200), nullable=False)
+
 with app.app_context():
   db.create_all()
 
 @app.route('/', methods=['GET','POST'])
 def home():
   if request.method == 'POST':
-    task_description = request.form.get('task')
-    if task_description:
-      # tasks.append( {'description': task_description, 'completed': False})
-      new_task = Task(description=task_description)
-      db.session.add(new_task)
+    book_isbn = request.form.get('isbn')
+    book_title = request.form.get('title')
+    book_author = request.form.get('author')
+    if book_isbn and book_title and book_author:
+      new_book = Book(isbn=book_isbn, title=book_title, author=book_author)
+      db.session.add(new_book)
       db.session.commit()
 
       return redirect(url_for('home'))
-  tasks = Task.query.all() 
-  return render_template('index.html', tasks=tasks)
+  
+  column_names = [col for col in Book.__table__.columns.keys() if col != 'id']
+  books = Book.query.all()
+  return render_template('index.html', books=books, column_names=column_names)
 
 @app.route('/about')
 def about():
   return render_template('about.html')
 
-@app.route('/complete/<int:task_id>')
-def complete_task(task_id):
-  task = Task.query.get(task_id)
-  # if 0 <= task_id < len(tasks):
-  #   tasks[task_id]['completed'] = True
-  if task: 
-    if task.completed == True:
-      task.completed = False
-    else: 
-      task.completed = True
+@app.route('/delete/<int:book_id>')
+def delete_book(book_id):
+  book = Book.query.get(book_id)
+  if book: 
+    db.session.delete(book)
     db.session.commit()
   return redirect(url_for('home'))
 
-@app.route('/delete/<int:task_id>')
-def delete_task(task_id):
-  # if 0 <= task_id < len(tasks):
-  #   tasks.pop(task_id)
-  task = Task.query.get(task_id)
-  if task: 
-    db.session.delete(task)
-    db.session.commit()
-  return redirect(url_for('home'))
-
-@app.route('/edit_task/<int:task_id>', methods=['GET', 'POST'])
-def edit_task(task_id):
-  task = Task.query.get(task_id)
-  # if request.method == 'POST':
-  #     new_description = request.form['description']
-  #     tasks[task_id]['description'] = new_description
-  #     return redirect(url_for('home'))
-  # else: 
-  #     task = tasks[task_id]
-  #     return render_template('edit_task.html', task=task)
+@app.route('/edit_book/<int:book_id>', methods=['GET', 'POST'])
+def edit_book(book_id):
+  book = Book.query.get(book_id)
   if request.method == 'POST':
-    new_description = request.form['description']
-    if task:
-      task.description = new_description
+    new_isbn = request.form['isbn']
+    new_title = request.form['title']
+    new_author = request.form['author']
+    if book:
+      book.isbn = new_isbn
+      book.title = new_title
+      book.author = new_author
       db.session.commit()
     return redirect(url_for('home'))
   else:
-    return render_template('edit_task.html', task=task)
+    return render_template('edit_book.html', book=book)
 
 if __name__ == '__main__':
-  # app.run(debug=True)
   app.run(host='0.0.0.0', port='8080', debug=True)

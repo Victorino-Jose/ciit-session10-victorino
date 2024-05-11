@@ -8,23 +8,35 @@ To-do Homepage
 {% block content %} 
 
 <div class="container">
-  <header>Todo-App</header>
+  <header>Book Catalogs</header>
   <form action="/" method="post">
-    <input type="text" id="taskInput" name="task" placeholder="Add new task">
-    <button type="submit">Add Task</button>
+    <div>
+      <input type="text" name="isbn" placeholder="ISBN">
+      <input type="text" name="title" placeholder="Title">
+      <input type="text" name="author" placeholder="Author">
+    </div>
+    <button type="submit">Add Book</button>
   </form>
-  <ul id="todo-list">
-    {% for task in tasks %}
-    <li class="{{ 'completed' if task['completed'] else '' }}">
-      <p>{{ task['description'] }}</p>
-      <div class="links">
-        <a class="done" href="{{ url_for('complete_task', task_id = task.id) }}">✔</a>
-        <a class="edit" href="{{ url_for('edit_task', task_id = task.id) }}">🖋</a>
-        <a class="delete" href="{{ url_for('delete_task', task_id = task.id) }}">🗑</a>
-      </div>
-    </li>
+
+  <table>
+    <tr>
+      {% for column_name in column_names %}
+      <th>{{ column_name }}</th>
+      {% endfor %}
+      <th>Action</th>
+    </tr>
+    {% for book in books %}
+    <tr>
+      <td>{{ book['isbn'] }}</td>
+      <td>{{ book['title'] }}</td>
+      <td>{{ book['author'] }}</td>
+      <td class="action">
+        <a class="edit" href="{{ url_for('edit_book', book_id = book.id) }}">🖋</a>
+        <a class="delete" href="{{ url_for('delete_book', book_id = book.id) }}">🗑</a>
+      </td>
+    </tr>
     {% endfor %}
-  </ul>
+  </table>
 </div>
 
 {% endblock %}
