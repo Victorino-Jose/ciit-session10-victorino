@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+To-do Homepage
+{% endblock %}
+
+
+{% block content %} 
+
+<div class="container">
+  <header>Todo-App</header>
+  <form action="/" method="post">
+    <input type="text" id="taskInput" name="task" placeholder="Add new task">
+    <button type="submit">Add Task</button>
+  </form>
+  <ul id="todo-list">
+    {% for task in tasks %}
+    <li class="{{ 'completed' if task['completed'] else '' }}">
+      <p>{{ task['description'] }}</p>
+      <div class="links">
+        <a class="done" href="{{ url_for('complete_task', task_id = task.id) }}">✔</a>
+        <a class="edit" href="{{ url_for('edit_task', task_id = task.id) }}">🖋</a>
+        <a class="delete" href="{{ url_for('delete_task', task_id = task.id) }}">🗑</a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

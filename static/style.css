@@ -1,0 +1,115 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+header{
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+input[type="text"]{
+  padding: 10px;
+  margin-bottom: 20px;
+}
+button{
+  padding: 10px;
+  cursor: pointer;
+}
+.edit_task{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.container{
+  margin-top: 50px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100hv;
+  width: 600px;
+  border-radius: 8px;
+  margin: 30px auto 0;
+}
+ul{
+  list-style: none;
+  width: 100%;
+}
+.container ul{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.container li{
+  background: rgb(157, 159, 173);
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+.container li.completed{
+  opacity: 0.6;
+}
+.container li.completed p{
+  text-decoration: line-through;
+}
+a{
+  color: white;
+  text-decoration: none;
+  background-color: transparent;
+}
+.container a{
+  border: 1px solid rgb(101, 101, 101);
+  border-radius: 5px;
+  padding: 3px 7px;
+}
+
+a.done{
+  background: rgb(5, 184, 5);
+}
+
+a.edit{
+  background: rgb(5, 5, 184);
+}
+
+a.delete{
+  background: rgb(198, 0, 0);
+}
+
+.navbar{
+  display: flex;
+}
+
+ul.navlist{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li.navitem{
+  float: left;
+}
+
+a.navcontent{
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+a.navcontent:hover{
+  background-color: #111;
+}
