@@ -113,3 +113,13 @@ td, th{
 td.action{
   text-align: center;
 }
+
+.about{
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+.about h1{
+  text-align: center;
+  margin-bottom: 10px;
+}
